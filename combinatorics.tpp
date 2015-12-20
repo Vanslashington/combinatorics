@@ -11,8 +11,9 @@
  * adding the two corresponding cells from the previous row.
  *
  * @TODO Template the function so that it effectively takes long, long long,
- *       etc.  Improve the dynamic expansion methodology to be more efficient.
- *       Add measures to protect against overflows and negatives.
+ *       etc.  Add measures to protect against overflows and negatives.
+ *       Unsigned long long's can only handle up to about 67C33;  just
+ *       precompute all of them beforehand.
  */
 unsigned long long combinatorics::combinations(int n, int r) {
   /// nCr = 0 for all r > n
@@ -51,7 +52,7 @@ unsigned long long combinatorics::combinations(int n, int r) {
  * For r > n, return 0.
  * Otherwise, return the consecutive product from (n-r)+1 to n.
  *
- * @TODO check for negatives and overflows
+ * @TODO Check for negatives and overflows
  */
 unsigned long long combinatorics::permutations(int n, int r) {
   if(r > n) return 0;
@@ -70,6 +71,12 @@ unsigned long long combinatorics::factorial(int n) {
 }
 
 //======================= Private Functions =======================//
+/**
+ * Return the consecutive product from first to last.
+ *
+ * @TODO Just precompute a large number of them (every one that can fit in
+ *       unsigned long long?) beforehand.
+ */
 unsigned long long
 combinatorics::static_resources::rangeProduct(int first, int last) {
   if(first > last) return 1;

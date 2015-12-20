@@ -3,6 +3,11 @@
 
 #include <vector>
 
+/**
+ * @brief Holds functions for doing combinatorial math.
+ *
+ * @TODO Implement more counting functions
+ */
 namespace combinatorics {
   //======================= Functions =======================//
   /**
@@ -54,6 +59,10 @@ namespace combinatorics {
    * This class will not have any public functions of its own, only outside
    * friend functions that can make use of the variables and objects inside of
    * the class.
+   *
+   * @TODO Implement a better static initialization scheme to do more
+   *       precomputations (pascal, consecutiveProduct, ...) at the beginning
+   *       of runtime.
    */
   class static_resources {
    public:
