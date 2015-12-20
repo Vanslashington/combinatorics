@@ -1,6 +1,7 @@
 #include "combinatorics.h"
 #include <algorithm>
 
+//======================= Public Functions =======================//
 /**
  * Rather than computing factorials, we build Pascal's triangle and take nCr
  * from row n and column r of the triangle.  For all r > n, nCr is defined
@@ -11,7 +12,7 @@
  *
  * @TODO Template the function so that it effectively takes long, long long,
  *       etc.  Improve the dynamic expansion methodology to be more efficient.
- *       Add measures to protect against overflows.
+ *       Add measures to protect against overflows and negatives.
  */
 unsigned long long combinatorics::combinations(int n, int r) {
   /// nCr = 0 for all r > n
@@ -44,4 +45,42 @@ unsigned long long combinatorics::combinations(int n, int r) {
 
   /// The value at row n and column r of the triangle is now computed
   return pascal[n][r];
+}
+
+/**
+ * For r > n, return 0.
+ * Otherwise, return the consecutive product from (n-r)+1 to n.
+ *
+ * @TODO check for negatives and overflows
+ */
+unsigned long long combinatorics::permutations(int n, int r) {
+  if(r > n) return 0;
+  return static_resources::rangeProduct((n-r)+1, n);
+}
+
+/**
+ * For n == 0, return 1.
+ * Otherwise, return the consecutive product from 1 to n.
+ *
+ * @TODO check for negatives and overflows
+ */
+unsigned long long combinatorics::factorial(int n) {
+  if(n == 0) return 1;
+  return static_resources::rangeProduct(1, n);
+}
+
+//======================= Private Functions =======================//
+unsigned long long
+combinatorics::static_resources::rangeProduct(int first, int last) {
+  if(first > last) return 1;
+  if(first == 0) return 0;
+
+  if(productsFilled == false) {
+    for(int i = 2; i <= 20; ++i)
+      consecutiveProduct[i] = consecutiveProduct[i-1] * i;
+    productsFilled = true;
+  }
+
+  if(first == 1) return consecutiveProduct[last];
+  return consecutiveProduct[last] / consecutiveProduct[first-1];
 }
