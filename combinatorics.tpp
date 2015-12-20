@@ -1,5 +1,4 @@
 #include "combinatorics.h"
-#include <vector>
 #include <algorithm>
 
 /**
@@ -14,7 +13,7 @@
  *       etc.  Improve the dynamic expansion methodology to be more efficient.
  *       Add measures to protect against overflows.
  */
-int combinations(int n, int r) {
+int combinatorics::combinations(int n, int r) {
   /// nCr = 0 for all r > n
   if(r > n) return 0;
 
