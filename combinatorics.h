@@ -4,6 +4,24 @@
 #include <vector>
 
 namespace combinatorics {
+  /////////////////////////// Functions ///////////////////////////
+  /**
+   * @brief Returns the number of combinations of r objects from a set of n
+   *        objects.
+   *
+   * Returns the result of the typical nCr function, which is equal to:
+   *  (n!)/((n-r)! * r!)
+   * for all r <= n, and
+   *  0
+   * for all r > n
+   *
+   * @param n the integer number of objects in the set to choose from
+   * @param r the integer number of objects to select from a set of n objects
+   * @return the number of combinations of r objects from n
+   */
+  int combinations(int n, int r);
+
+  /////////////////////////// Classes and Structs ///////////////////////////
   /**
    * @brief Uninstantiable class to hold static objects and variables needed
    *        by combinatorial functions
@@ -14,20 +32,6 @@ namespace combinatorics {
    */
   class static_resources {
    public:
-    /**
-     * @brief Returns the number of combinations of r objects from a set of n
-     *        objects.
-     *
-     * Returns the result of the typical nCr function, which is equal to:
-     *  (n!)/((n-r)! * r!)
-     * for all r <= n, and
-     *  0
-     * for all r > n
-     *
-     * @param n the integer number of objects in the set to choose from
-     * @param r the integer number of objects to select from a set of n objects
-     * @return the number of combinations of r objects from n
-     */
     friend int combinations(int n, int r);
 
    private:
@@ -39,6 +43,7 @@ namespace combinatorics {
     static int greatestPascal_n, greatestPascal_r;
   };
 
+  /////////////////////////// Static Initialization ///////////////////////////
   // Pascal's triangle
   // Start at size 1x1;  0C0 == 1
   std::vector<std::vector<int> >
@@ -46,9 +51,6 @@ namespace combinatorics {
 
   int static_resources::greatestPascal_n = 0,
       static_resources::greatestPascal_r = 0;
-
-  // Combinatorial function prototypes
-  int combinations(int n, int r);
 }
 
 #include "combinatorics.tpp" // Template implementation file
