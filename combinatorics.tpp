@@ -13,12 +13,13 @@
  *       etc.  Improve the dynamic expansion methodology to be more efficient.
  *       Add measures to protect against overflows.
  */
-int combinatorics::combinations(int n, int r) {
+unsigned long long combinatorics::combinations(int n, int r) {
   /// nCr = 0 for all r > n
   if(r > n) return 0;
 
-  // Aliases for brevity
-  std::vector<std::vector<int> >& pascal = static_resources::pascal;
+  // typedef and aliases for brevity
+  typedef unsigned long long ull;
+  std::vector<std::vector<ull> >& pascal = static_resources::pascal;
   int& greatestPascal_n = static_resources::greatestPascal_n;
   int& greatestPascal_r = static_resources::greatestPascal_r;
 
@@ -32,7 +33,7 @@ int combinatorics::combinations(int n, int r) {
     greatestPascal_r = r;
   }
   if(n > greatestPascal_n) {
-    pascal.resize(n+1, std::vector<int>());
+    pascal.resize(n+1, std::vector<ull>());
     for(int i = greatestPascal_n+1; i <= n; ++i) {
       pascal[i].resize(std::min(i+1, greatestPascal_r+1), 1);
       for(int j = 1; j < i && j <= greatestPascal_r; ++j)

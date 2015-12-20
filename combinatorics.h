@@ -19,7 +19,7 @@ namespace combinatorics {
    * @param r the integer number of objects to select from a set of n objects
    * @return the number of combinations of r objects from n
    */
-  int combinations(int n, int r);
+  unsigned long long combinations(int n, int r);
 
   /////////////////////////// Classes and Structs ///////////////////////////
   /**
@@ -32,22 +32,22 @@ namespace combinatorics {
    */
   class static_resources {
    public:
-    friend int combinations(int n, int r);
+    friend unsigned long long combinations(int n, int r);
 
    private:
     static_resources(); // Private constructor; can't be instantiated
 
     /// Create Pascal's triangle as a static 2D vector, for keeping
     /// previously-computed values between function calls
-    static std::vector<std::vector<int> > pascal;
+    static std::vector<std::vector<unsigned long long> > pascal;
     static int greatestPascal_n, greatestPascal_r;
   };
 
   /////////////////////////// Static Initialization ///////////////////////////
   // Pascal's triangle
   // Start at size 1x1;  0C0 == 1
-  std::vector<std::vector<int> >
-  static_resources::pascal(0+1, std::vector<int>(0+1, 1));
+  std::vector<std::vector<unsigned long long> >
+  static_resources::pascal(0+1, std::vector<unsigned long long>(0+1, 1));
 
   int static_resources::greatestPascal_n = 0,
       static_resources::greatestPascal_r = 0;
